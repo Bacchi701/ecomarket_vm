@@ -33,4 +33,8 @@ public class Cliente { // id, run, nombre, apellido, correo, direccionEnvio
     @Column(nullable = false)
     private String direccionEnvio;
 
+    @OneToOne
+    @JoinColumn(name = "id_cuenta", nullable = false)
+    private Cuenta cuenta;
+
 }

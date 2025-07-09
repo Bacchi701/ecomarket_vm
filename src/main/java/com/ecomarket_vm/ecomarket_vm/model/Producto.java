@@ -18,17 +18,17 @@ public class Producto { // idProducto, nombre, descripcion, precio, cantidad
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProducto;
     
-    @Column(unique=true, length = 13, nullable=false)
+    @Column(unique = true, length = 13, nullable = false)
     private String nombre;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String descripcion;
 
-    @Column(nullable=false)
-    private Integer precio;
+    @Column(nullable = false)
+    private Long precio;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Integer cantidad;
     
-    
+
 }
