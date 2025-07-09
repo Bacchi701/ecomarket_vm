@@ -20,7 +20,7 @@ public class Envio { // idEnvio, runComprador, fechaCompra, fechaEntrega
     private Date fechaCompra;
     private Date fechaEntrega;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_cuenta", nullable = false)
     private Cuenta cuenta;
 

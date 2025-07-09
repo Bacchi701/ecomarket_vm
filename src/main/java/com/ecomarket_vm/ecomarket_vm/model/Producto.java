@@ -21,5 +21,8 @@ public class Producto { // idProducto, nombre, descripcion, precio, cantidad
     private Integer precio;
     private Integer cantidad;
     
+    @ManyToOne
+    @JoinColumn(name = "id_envio", nullable = false)
+    private Envio envio;
 
 }

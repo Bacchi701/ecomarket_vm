@@ -31,17 +31,6 @@ public class DataLoader implements CommandLineRunner {
         Faker faker = new Faker();
         Random random = new Random();
 
-        // Generar productos
-        for (int i = 0; i < 20; i++) {
-            Producto producto = new Producto();
-            producto.setIdProducto(i + 1);
-            producto.setNombre(faker.brand().car());
-            producto.setDescripcion(faker.text().text(5, 20));
-            producto.setPrecio(faker.number().numberBetween(10000, 99999));
-            producto.setCantidad(faker.number().randomDigit());
-            productoRepository.save(producto);
-        }
-
         // Generar clientes
         for (int i = 0; i < 50; i++) {
             Cliente cliente = new Cliente();
@@ -53,21 +42,20 @@ public class DataLoader implements CommandLineRunner {
             cliente.setDireccionEnvio(faker.address().fullAddress());
             clienteRepository.save(cliente);
         }
-
+        
         List<Cliente> clientes = clienteRepository.findAll();
         // Generar cuentas
         for (int i = 0; i < 50; i++) {
             Cuenta cuenta = new Cuenta();
             cuenta.setId(i + 1);
-            cuenta.setCliente(clientes.get(random.nextInt(clientes.size())));
             cuenta.setUsuario(faker.internet().username());
             cuenta.setPassword(faker.internet().password());
             cuenta.setRol(faker.darkSouls().classes()); // REVISAR
+            cuenta.setCliente(clientes.get(random.nextInt(clientes.size())));
             cuentaRepository.save(cuenta);
         }
 
         List<Cuenta> cuentas = cuentaRepository.findAll();
-        
         // Generar envios
         for (int i = 0; i < 50; i++) {
             Envio envio = new Envio();
@@ -77,6 +65,19 @@ public class DataLoader implements CommandLineRunner {
             envio.setFechaCompra(new Date());
             envio.setFechaEntrega(new Date());
             envioRepository.save(envio);
+        }
+
+        List<Envio> envios = envioRepository.findAll();
+        // Generar productos
+        for (int i = 0; i < 20; i++) {
+            Producto producto = new Producto();
+            producto.setIdProducto(i + 1);
+            producto.setNombre(faker.brand().car());
+            producto.setDescripcion(faker.text().text(5, 20));
+            producto.setPrecio(faker.number().numberBetween(10000, 99999));
+            producto.setCantidad(faker.number().randomDigit());
+            producto.setEnvio(envios.get(random.nextInt(envios.size())));
+            productoRepository.save(producto);
         }
     }
 }

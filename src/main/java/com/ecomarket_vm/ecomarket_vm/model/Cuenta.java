@@ -20,7 +20,7 @@ public class Cuenta { // id, usuario, password, rol
     private String password;
     private String rol;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 }
