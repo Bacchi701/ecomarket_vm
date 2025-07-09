@@ -22,9 +22,4 @@ public class Cliente { // id, run, nombre, apellido, correo, direccionEnvio
     private String correo;
     private String direccionEnvio;
 
-    @OneToOne
-    @JoinColumn(name = "id_cuenta", nullable = false)
-    private Cuenta cuenta;
-
-
 }

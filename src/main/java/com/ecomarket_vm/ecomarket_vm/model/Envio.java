@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Envio { // idProducto, runComprador, fechaCompra, fechaEntrega
+public class Envio { // idEnvio, runComprador, fechaCompra, fechaEntrega
 
     @Id
     private Integer idEnvio;
@@ -20,7 +20,7 @@ public class Envio { // idProducto, runComprador, fechaCompra, fechaEntrega
     private Date fechaCompra;
     private Date fechaEntrega;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_cuenta", nullable = false)
     private Cuenta cuenta;
 

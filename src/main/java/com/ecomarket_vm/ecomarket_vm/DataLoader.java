@@ -42,11 +42,24 @@ public class DataLoader implements CommandLineRunner {
             productoRepository.save(producto);
         }
 
+        // Generar clientes
+        for (int i = 0; i < 50; i++) {
+            Cliente cliente = new Cliente();
+            cliente.setId(i + 1);
+            cliente.setRun(faker.idNumber().valid());
+            cliente.setNombre(faker.name().firstName());
+            cliente.setApellido(faker.name().lastName());
+            cliente.setCorreo(faker.internet().emailAddress());
+            cliente.setDireccionEnvio(faker.address().fullAddress());
+            clienteRepository.save(cliente);
+        }
 
+        List<Cliente> clientes = clienteRepository.findAll();
         // Generar cuentas
         for (int i = 0; i < 50; i++) {
             Cuenta cuenta = new Cuenta();
             cuenta.setId(i + 1);
+            cuenta.setCliente(clientes.get(random.nextInt(clientes.size())));
             cuenta.setUsuario(faker.internet().username());
             cuenta.setPassword(faker.internet().password());
             cuenta.setRol(faker.darkSouls().classes()); // REVISAR
@@ -59,25 +72,11 @@ public class DataLoader implements CommandLineRunner {
         for (int i = 0; i < 50; i++) {
             Envio envio = new Envio();
             envio.setIdEnvio(i + 1);
+            envio.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
             envio.setRunComprador(faker.idNumber().valid());
             envio.setFechaCompra(new Date());
             envio.setFechaEntrega(new Date());
-            envio.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
             envioRepository.save(envio);
-        }
-
-        
-        // Generar clientes
-        for (int i = 0; i < 50; i++) {
-            Cliente cliente = new Cliente();
-            cliente.setId(i + 1);
-            cliente.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
-            cliente.setRun(faker.idNumber().valid());
-            cliente.setNombre(faker.name().firstName());
-            cliente.setApellido(faker.name().lastName());
-            cliente.setCorreo(faker.internet().emailAddress());
-            cliente.setDireccionEnvio(faker.address().fullAddress());
-            clienteRepository.save(cliente);
         }
     }
 }
