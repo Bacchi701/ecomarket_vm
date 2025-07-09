@@ -16,17 +16,12 @@ public class Envio { // idProducto, runComprador, fechaCompra, fechaEntrega
 
     @Id
     private Integer idEnvio;
-    
-    @Column(unique = true, length = 13, nullable = false)
     private String runComprador;
-
-    @Column(nullable = false)
     private Date fechaCompra;
-
-    @Column(nullable = false)
     private Date fechaEntrega;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_cuenta", nullable = false)
     private Cuenta cuenta;
+
 }

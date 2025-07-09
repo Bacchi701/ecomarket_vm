@@ -16,20 +16,10 @@ public class Cliente { // id, run, nombre, apellido, correo, direccionEnvio
 
     @Id
     private Integer id;
-
-    @Column(unique = true, length = 13, nullable = false)
     private String run;
-
-    @Column(nullable = false)
     private String nombre;
-
-    @Column(nullable = false)
     private String apellido;
-
-    @Column(nullable = false)
     private String correo;
-
-    @Column(nullable = false)
     private String direccionEnvio;
 
     @OneToOne

@@ -41,31 +41,29 @@ public class DataLoader implements CommandLineRunner {
             producto.setCantidad(faker.number().randomDigit());
             productoRepository.save(producto);
         }
-        List<Cuenta> cuentas = cuentaRepository.findAll();
 
-        // Generar envios
-        for (int i = 0; i < 50; i++) {
-            Envio envio = new Envio();
-            envio.setIdEnvio(i + 1);
-            envio.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
-            envio.setRunComprador(faker.idNumber().valid());
-            envio.setFechaCompra(new Date());
-            envio.setFechaEntrega(new Date());
-            envioRepository.save(envio);
-        }
-
-        List<Envio> envios = envioRepository.findAll();
 
         // Generar cuentas
         for (int i = 0; i < 50; i++) {
             Cuenta cuenta = new Cuenta();
             cuenta.setId(i + 1);
-            cuenta.setEnvio(envios.get(random.nextInt(envios.size())));
             cuenta.setUsuario(faker.internet().username());
-            cuenta.setPassword(faker.text().text(8, 20, true, true, true));
-            //cuenta.setPassword(faker.internet().password());
+            cuenta.setPassword(faker.internet().password());
             cuenta.setRol(faker.darkSouls().classes()); // REVISAR
             cuentaRepository.save(cuenta);
+        }
+
+        List<Cuenta> cuentas = cuentaRepository.findAll();
+        
+        // Generar envios
+        for (int i = 0; i < 50; i++) {
+            Envio envio = new Envio();
+            envio.setIdEnvio(i + 1);
+            envio.setRunComprador(faker.idNumber().valid());
+            envio.setFechaCompra(new Date());
+            envio.setFechaEntrega(new Date());
+            envio.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
+            envioRepository.save(envio);
         }
 
         
