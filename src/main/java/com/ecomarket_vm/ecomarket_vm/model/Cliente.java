@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class Cliente { // id, run, nombre, apellido, correo, direccionEnvio
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true, length = 13, nullable = false)
@@ -36,5 +35,6 @@ public class Cliente { // id, run, nombre, apellido, correo, direccionEnvio
     @OneToOne
     @JoinColumn(name = "id_cuenta", nullable = false)
     private Cuenta cuenta;
+
 
 }

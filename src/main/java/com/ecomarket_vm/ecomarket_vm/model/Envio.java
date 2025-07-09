@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class Envio { // idProducto, runComprador, fechaCompra, fechaEntrega
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEnvio;
     
     @Column(unique = true, length = 13, nullable = false)
@@ -27,8 +26,7 @@ public class Envio { // idProducto, runComprador, fechaCompra, fechaEntrega
     @Column(nullable = false)
     private Date fechaEntrega;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_cuenta", nullable = false)
     private Cuenta cuenta;
-    
 }

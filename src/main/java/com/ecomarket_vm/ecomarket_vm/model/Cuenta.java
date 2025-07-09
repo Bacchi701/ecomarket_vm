@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class Cuenta { // id, usuario, password, rol
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @Column(unique = true, length = 13, nullable = false)
@@ -28,12 +27,6 @@ public class Cuenta { // id, usuario, password, rol
     private String rol;
 
     @OneToOne
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Cliente cliente;
-
-    @OneToOne
     @JoinColumn(name = "id_envio", nullable = false)
     private Envio envio;
-
-    
 }
