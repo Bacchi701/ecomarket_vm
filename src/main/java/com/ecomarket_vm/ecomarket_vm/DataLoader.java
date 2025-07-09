@@ -31,21 +31,6 @@ public class DataLoader implements CommandLineRunner {
         Faker faker = new Faker();
         Random random = new Random();
 
-
-        List<Cuenta> cuentas = cuentaRepository.findAll();
-        // Generar clientes
-        for (int i = 0; i < 50; i++) {
-            Cliente cliente = new Cliente();
-            cliente.setId(i + 1);
-            cliente.setCuenta(cuentas.get(random.nextInt(cuentas.size())));  //OneToOne
-            cliente.setRun(faker.idNumber().valid());
-            cliente.setNombre(faker.name().firstName());
-            cliente.setApellido(faker.name().lastName());
-            cliente.setCorreo(faker.internet().emailAddress());
-            cliente.setDireccionEnvio(faker.address().fullAddress());
-            clienteRepository.save(cliente);
-        }
-
         List<Cliente> clientes = clienteRepository.findAll();
         List<Envio> envios = envioRepository.findAll();
 
@@ -53,13 +38,39 @@ public class DataLoader implements CommandLineRunner {
         for (int i = 0; i < 50; i++) {
             Cuenta cuenta = new Cuenta();
             cuenta.setId(i + 1);
-            cuenta.setCliente(clientes.get(random.nextInt(clientes.size()))); //OneToOne
-            cuenta.setEnvio(envios.get(random.nextInt(envios.size()))); //OneToMany
+            cuenta.setCliente(clientes.get(random.nextInt(clientes.size())));
+            cuenta.setEnvio(envios.get(random.nextInt(envios.size())));
             cuenta.setUsuario(faker.internet().username());
-            cuenta.setPassword(faker.internet().password());
+            cuenta.setPassword(faker.text().text(8, 20, true, true, true));
+            //cuenta.setPassword(faker.internet().password());
             cuenta.setRol(faker.darkSouls().classes()); // REVISAR
             cuentaRepository.save(cuenta);
         }
+
+        List<Cuenta> cuentas = cuentaRepository.findAll();
+        // Generar envios
+        for (int i = 0; i < 50; i++) {
+            Envio envio = new Envio();
+            envio.setIdEnvio(i + 1);
+            envio.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
+            envio.setRunComprador(faker.idNumber().valid());
+            envio.setFechaCompra(new Date());
+            envio.setFechaEntrega(new Date());
+            envioRepository.save(envio);
+        }
+        
+        // Generar clientes
+        for (int i = 0; i < 50; i++) {
+            Cliente cliente = new Cliente();
+            cliente.setId(i + 1);
+            cliente.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
+            cliente.setRun(faker.idNumber().valid());
+            cliente.setNombre(faker.name().firstName());
+            cliente.setApellido(faker.name().lastName());
+            cliente.setCorreo(faker.internet().emailAddress());
+            cliente.setDireccionEnvio(faker.address().fullAddress());
+            clienteRepository.save(cliente);
+        }        
 
         // Generar productos
         for (int i = 0; i < 20; i++) {
@@ -67,20 +78,9 @@ public class DataLoader implements CommandLineRunner {
             producto.setIdProducto(i + 1);
             producto.setNombre(faker.brand().car());
             producto.setDescripcion(faker.text().text(5, 20));
-            producto.setPrecio(faker.number().randomNumber(5));
+            producto.setPrecio(faker.number().numberBetween(10000, 99999));
             producto.setCantidad(faker.number().randomDigit());
             productoRepository.save(producto);
-        }
-
-        // Generar envios
-        for (int i = 0; i < 50; i++) {
-            Envio envio = new Envio();
-            envio.setIdEnvio(i + 1);
-            envio.setCuenta(cuentas.get(random.nextInt(cuentas.size()))); //ManyToOne
-            envio.setRunComprador(faker.idNumber().valid());
-            envio.setFechaCompra(new Date());
-            envio.setFechaEntrega(new Date());
-            envioRepository.save(envio);
         }
     }
 }

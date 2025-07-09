@@ -31,7 +31,7 @@ public class Cuenta { // id, usuario, password, rol
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "id_envio", nullable = false)
     private Envio envio;
 

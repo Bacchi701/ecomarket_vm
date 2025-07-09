@@ -25,7 +25,7 @@ public class Producto { // idProducto, nombre, descripcion, precio, cantidad
     private String descripcion;
 
     @Column(nullable = false)
-    private Long precio;
+    private Integer precio;
 
     @Column(nullable = false)
     private Integer cantidad;
