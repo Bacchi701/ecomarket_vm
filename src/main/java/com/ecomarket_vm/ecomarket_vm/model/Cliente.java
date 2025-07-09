@@ -7,12 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name= "cliente")
+@Table(name = "cliente")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Cliente {
+public class Cliente { // id, run, nombre, apellido, correo, direccionEnvio
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,7 @@ public class Cliente {
     private String run;
 
     @Column(nullable = false)
-    private String primerNombre;
-
-    @Column(nullable = false)
-    private String segundoNombre;
+    private String nombre;
 
     @Column(nullable = false)
     private String apellido;
