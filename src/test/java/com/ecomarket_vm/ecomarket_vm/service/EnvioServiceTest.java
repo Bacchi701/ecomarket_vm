@@ -4,7 +4,7 @@ import com.ecomarket_vm.ecomarket_vm.model.Cliente;
 import com.ecomarket_vm.ecomarket_vm.model.Envio;
 import com.ecomarket_vm.ecomarket_vm.model.Producto;
 import com.ecomarket_vm.ecomarket_vm.repository.EnvioRepository;
-import com.ecomarket_vm.ecomarket_vm.service.EnvioService;
+// import com.ecomarket_vm.ecomarket_vm.service.EnvioService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

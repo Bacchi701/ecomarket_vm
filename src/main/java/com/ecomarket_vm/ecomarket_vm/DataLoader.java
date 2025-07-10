@@ -43,6 +43,17 @@ public class DataLoader implements CommandLineRunner {
             clienteRepository.save(cliente);
         }
         
+        // Generar productos
+        for (int i = 0; i < 20; i++) {
+            Producto producto = new Producto();
+            producto.setCodigo(i + 1);
+            producto.setNombre(faker.brand().car());
+            producto.setDescripcion(faker.text().text(5, 20));
+            producto.setPrecio(faker.number().numberBetween(10000, 99999));
+            producto.setCantidad(faker.number().randomDigit());
+            productoRepository.save(producto);
+        }
+
         List<Cliente> clientes = clienteRepository.findAll();
         // Generar cuentas
         for (int i = 0; i < 50; i++) {
@@ -68,16 +79,5 @@ public class DataLoader implements CommandLineRunner {
             envioRepository.save(envio);
         }
 
-        
-        // Generar productos
-        for (int i = 0; i < 20; i++) {
-            Producto producto = new Producto();
-            producto.setCodigo(i + 1);
-            producto.setNombre(faker.brand().car());
-            producto.setDescripcion(faker.text().text(5, 20));
-            producto.setPrecio(faker.number().numberBetween(10000, 99999));
-            producto.setCantidad(faker.number().randomDigit());
-            productoRepository.save(producto);
-        }
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.ecomarket_vm.ecomarket_vm.model.Producto;
 import com.ecomarket_vm.ecomarket_vm.repository.ProductoRepository;
-import com.ecomarket_vm.ecomarket_vm.service.ProductoService;
+//import com.ecomarket_vm.ecomarket_vm.service.ProductoService;
 
 @SpringBootTest
 public class ProductoServiceTest {
