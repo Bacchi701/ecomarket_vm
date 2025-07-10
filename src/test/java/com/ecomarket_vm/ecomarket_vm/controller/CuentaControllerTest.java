@@ -58,9 +58,9 @@ public class CuentaControllerTest {
         mockMvc.perform(get("/api/cuentas/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$[0].usuario").value("Juancito01"))
-                .andExpect(jsonPath("$[0].password").value("asd123"))
-                .andExpect(jsonPath("$[0].rol").value("Cliente"));
+                .andExpect(jsonPath("$.usuario").value("Juancito01"))
+                .andExpect(jsonPath("$.password").value("asd123"))
+                .andExpect(jsonPath("$.rol").value("Cliente"));
     }
 
     @Test
@@ -72,9 +72,9 @@ public class CuentaControllerTest {
                         .content(objectMapper.writeValueAsString(cuenta)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$[0].usuario").value("Juancito01"))
-                .andExpect(jsonPath("$[0].password").value("asd123"))
-                .andExpect(jsonPath("$[0].rol").value("Cliente"));
+                .andExpect(jsonPath("$.usuario").value("Juancito01"))
+                .andExpect(jsonPath("$.password").value("asd123"))
+                .andExpect(jsonPath("$.rol").value("Cliente"));
     }
 
     @Test
@@ -86,9 +86,9 @@ public class CuentaControllerTest {
                         .content(objectMapper.writeValueAsString(cuenta)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$[0].usuario").value("Juancito01"))
-                .andExpect(jsonPath("$[0].password").value("asd123"))
-                .andExpect(jsonPath("$[0].rol").value("Cliente"));
+                .andExpect(jsonPath("$.usuario").value("Juancito01"))
+                .andExpect(jsonPath("$.password").value("asd123"))
+                .andExpect(jsonPath("$.rol").value("Cliente"));
     }
 
     @Test

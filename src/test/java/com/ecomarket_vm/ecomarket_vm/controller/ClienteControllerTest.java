@@ -63,10 +63,10 @@ public class ClienteControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.run").value("12345678-9"))
-                .andExpect(jsonPath("$[0].nombre").value("Juan"))
-                .andExpect(jsonPath("$[0].apellido").value("Perez"))
-                .andExpect(jsonPath("$[0].correo").value("juan.perez@gmail.com"))
-                .andExpect(jsonPath("$[0].direccionEnvio").value("Av. Jose Miguel Carrera 8000"));
+                .andExpect(jsonPath("$.nombre").value("Juan"))
+                .andExpect(jsonPath("$.apellido").value("Perez"))
+                .andExpect(jsonPath("$.correo").value("juan.perez@gmail.com"))
+                .andExpect(jsonPath("$.direccionEnvio").value("Av. Jose Miguel Carrera 8000"));
     }
 
     @Test
@@ -79,10 +79,10 @@ public class ClienteControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.run").value("12345678-9"))
-                .andExpect(jsonPath("$[0].nombre").value("Juan"))
-                .andExpect(jsonPath("$[0].apellido").value("Perez"))
-                .andExpect(jsonPath("$[0].correo").value("juan.perez@gmail.com"))
-                .andExpect(jsonPath("$[0].direccionEnvio").value("Av. Jose Miguel Carrera 8000"));
+                .andExpect(jsonPath("$.nombre").value("Juan"))
+                .andExpect(jsonPath("$.apellido").value("Perez"))
+                .andExpect(jsonPath("$.correo").value("juan.perez@gmail.com"))
+                .andExpect(jsonPath("$.direccionEnvio").value("Av. Jose Miguel Carrera 8000"));
     }
 
     @Test
@@ -95,10 +95,10 @@ public class ClienteControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.run").value("12345678-9"))
-                .andExpect(jsonPath("$[0].nombre").value("Juan"))
-                .andExpect(jsonPath("$[0].apellido").value("Perez"))
-                .andExpect(jsonPath("$[0].correo").value("juan.perez@gmail.com"))
-                .andExpect(jsonPath("$[0].direccionEnvio").value("Av. Jose Miguel Carrera 8000"));
+                .andExpect(jsonPath("$.nombre").value("Juan"))
+                .andExpect(jsonPath("$.apellido").value("Perez"))
+                .andExpect(jsonPath("$.correo").value("juan.perez@gmail.com"))
+                .andExpect(jsonPath("$.direccionEnvio").value("Av. Jose Miguel Carrera 8000"));
     }
 
     @Test
