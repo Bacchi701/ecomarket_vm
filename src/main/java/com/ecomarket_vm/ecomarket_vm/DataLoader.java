@@ -50,7 +50,7 @@ public class DataLoader implements CommandLineRunner {
             cuenta.setId(i + 1);
             cuenta.setUsuario(faker.internet().username());
             cuenta.setPassword(faker.internet().password());
-            cuenta.setRol(faker.darkSouls().classes()); // REVISAR
+            cuenta.setRol(faker.basketball().positions()); // REVISAR
             cuenta.setCliente(clientes.get(random.nextInt(clientes.size())));
             cuentaRepository.save(cuenta);
         }
