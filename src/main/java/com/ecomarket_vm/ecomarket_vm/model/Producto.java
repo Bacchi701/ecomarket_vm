@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Producto { // idProducto, nombre, descripcion, precio, cantidad
+public class Producto { // codigo, nombre, descripcion, precio, cantidad
 
     @Id
-    private Integer idProducto;
+    private Integer codigo;
     private String nombre;
     private String descripcion;
     private Integer precio;

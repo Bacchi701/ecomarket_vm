@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Envio { // idEnvio, runComprador, fechaCompra, fechaEntrega
 
     @Id
-    private Integer idEnvio;
+    private Integer id;
     private String runComprador;
     private Date fechaCompra;
     private Date fechaEntrega;

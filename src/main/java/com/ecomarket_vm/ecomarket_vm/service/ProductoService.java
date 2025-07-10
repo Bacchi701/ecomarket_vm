@@ -21,15 +21,15 @@ public class ProductoService {
         return productoRepository.findAll();
     }
     
-    public Producto findById(long id){
-        return productoRepository.findById(id).get();
+    public Producto findById(Integer id){
+        return productoRepository.findById(id).orElse(null);
     }
     
     public Producto save(Producto producto){
         return productoRepository.save(producto);
     }
 
-    public void delete(Long id){
+    public void deleteById(Integer id){
         productoRepository.deleteById(id);
     }
 }

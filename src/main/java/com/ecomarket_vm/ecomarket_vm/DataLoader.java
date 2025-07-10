@@ -59,7 +59,7 @@ public class DataLoader implements CommandLineRunner {
         // Generar envios
         for (int i = 0; i < 50; i++) {
             Envio envio = new Envio();
-            envio.setIdEnvio(i + 1);
+            envio.setId(i + 1);
             envio.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
             envio.setRunComprador(faker.idNumber().valid());
             envio.setFechaCompra(new Date());
@@ -71,7 +71,7 @@ public class DataLoader implements CommandLineRunner {
         // Generar productos
         for (int i = 0; i < 20; i++) {
             Producto producto = new Producto();
-            producto.setIdProducto(i + 1);
+            producto.setCodigo(i + 1);
             producto.setNombre(faker.brand().car());
             producto.setDescripcion(faker.text().text(5, 20));
             producto.setPrecio(faker.number().numberBetween(10000, 99999));

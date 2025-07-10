@@ -21,15 +21,15 @@ public class CuentaService {
         return cuentaRepository.findAll();
     }
 
-    public Cuenta findById(long id){
-        return cuentaRepository.findById(id).get();
+    public Cuenta findById(Integer id){
+        return cuentaRepository.findById(id).orElse(null);
     }
 
     public Cuenta save(Cuenta cuenta){
         return cuentaRepository.save(cuenta);
     }
 
-    public void delete(Long id){
+    public void deleteById(Integer id){
         cuentaRepository.deleteById(id);
     }
 }

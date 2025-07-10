@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.ecomarket_vm.ecomarket_vm.model.Cliente;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     
 }

@@ -21,15 +21,15 @@ public class EnvioService {
         return envioRepository.findAll();
     }
     
-    public Envio findById(long id){
-        return envioRepository.findById(id).get();
+    public Envio findById(Integer id){
+        return envioRepository.findById(id).orElse(null);
     }
     
     public Envio save(Envio envio){
         return envioRepository.save(envio);
     }
 
-    public void delete(Long id){
+    public void deleteById(Integer id){
         envioRepository.deleteById(id);
     }
 }
