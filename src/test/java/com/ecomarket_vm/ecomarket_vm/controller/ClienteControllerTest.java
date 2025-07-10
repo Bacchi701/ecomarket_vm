@@ -46,7 +46,7 @@ public class ClienteControllerTest {
     public void testGetAllClientes() throws Exception {
         when(clienteService.findAll()).thenReturn(List.of(cliente));
 
-        mockMvc.perform(get("/api/v1/cliente"))
+        mockMvc.perform(get("/api/clientes"))
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].run").value("12345678-9"))
                 .andExpect(jsonPath("$[0].nombre").value("Juan"))
@@ -59,7 +59,7 @@ public class ClienteControllerTest {
     public void testGetClienteById() throws Exception {
         when(clienteService.findById(1)).thenReturn(cliente);
 
-        mockMvc.perform(get("/api/v1/cliente/1"))
+        mockMvc.perform(get("/api/clientes/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.run").value("12345678-9"))
@@ -73,7 +73,7 @@ public class ClienteControllerTest {
     public void testCreateCliente() throws Exception {
         when(clienteService.save(any(Cliente.class))).thenReturn(cliente);
 
-        mockMvc.perform(post("/api/cliente")
+        mockMvc.perform(post("/api/clientes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cliente)))
                 .andExpect(status().isOk())
@@ -89,7 +89,7 @@ public class ClienteControllerTest {
     public void testUpdateCliente() throws Exception {
         when(clienteService.save(any(Cliente.class))).thenReturn(cliente);
 
-        mockMvc.perform(put("/api/v1/cliente/1")
+        mockMvc.perform(put("/api/clientes/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cliente)))
                 .andExpect(status().isOk())
@@ -107,7 +107,7 @@ public class ClienteControllerTest {
         doNothing().when(clienteService).deleteById(1);
 
         
-        mockMvc.perform(delete("/api/v1/cliente/1"))
+        mockMvc.perform(delete("/api/clientes/1"))
                 .andExpect(status().isOk());
 
         

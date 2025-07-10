@@ -44,7 +44,7 @@ public class CuentaControllerTest {
     public void testGetAllCuentas() throws Exception {
         when(cuentaService.findAll()).thenReturn(List.of(cuenta));
 
-        mockMvc.perform(get("/api/v1/cuenta"))
+        mockMvc.perform(get("/api/cuentas"))
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].usuario").value("Juancito01"))
                 .andExpect(jsonPath("$[0].password").value("asd123"))
@@ -55,7 +55,7 @@ public class CuentaControllerTest {
     public void testGetCuentaById() throws Exception {
         when(cuentaService.findById(1)).thenReturn(cuenta);
 
-        mockMvc.perform(get("/api/v1/cuenta/1"))
+        mockMvc.perform(get("/api/cuentas/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$[0].usuario").value("Juancito01"))
@@ -67,7 +67,7 @@ public class CuentaControllerTest {
     public void testCreateCuenta() throws Exception {
         when(cuentaService.save(any(Cuenta.class))).thenReturn(cuenta);
 
-        mockMvc.perform(post("/api/cuenta")
+        mockMvc.perform(post("/api/cuentas")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuenta)))
                 .andExpect(status().isOk())
@@ -81,7 +81,7 @@ public class CuentaControllerTest {
     public void testUpdateCuenta() throws Exception {
         when(cuentaService.save(any(Cuenta.class))).thenReturn(cuenta);
 
-        mockMvc.perform(put("/api/v1/cuenta/1")
+        mockMvc.perform(put("/api/cuentas/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuenta)))
                 .andExpect(status().isOk())
@@ -97,7 +97,7 @@ public class CuentaControllerTest {
         doNothing().when(cuentaService).deleteById(1);
 
         
-        mockMvc.perform(delete("/api/v1/cuenta/1"))
+        mockMvc.perform(delete("/api/cuentas/1"))
                 .andExpect(status().isOk());
 
         
