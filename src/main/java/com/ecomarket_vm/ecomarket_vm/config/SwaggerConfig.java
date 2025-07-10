@@ -15,6 +15,6 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("API 2026 EcoMarket")
                         .version("1.0")
-                        .description("Documentación de la API para el sistema de EcoMarket"));
+                        .description("Documentación de la API para el sistema de EcoMarket SPA"));
     }
 }
