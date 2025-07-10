@@ -3,8 +3,7 @@ package com.ecomarket_vm.ecomarket_vm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,56 +26,31 @@ public class CuentaController {
     private CuentaService cuentaService;
 
     @GetMapping
-    public ResponseEntity<List<Cuenta>> listar(){
-        List<Cuenta> cuentas = cuentaService.findAll();
-        if (cuentas.isEmpty()){
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(cuentas);
-    }
-    
-    @PostMapping
-    public ResponseEntity<Cuenta> guardar(@RequestBody Cuenta cuenta){
-        Cuenta productoNuevo = cuentaService.save(cuenta);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productoNuevo);
-
+    public List<Cuenta> getAllCuentas() {
+        return cuentaService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cuenta> buscar(@PathVariable Integer id){
-        try {
-            Cuenta cuenta = cuentaService.findById(id);
-            return ResponseEntity.ok(cuenta);
-        } catch ( Exception e ) {
-            return ResponseEntity.notFound().build();
-        }
+    public Cuenta getCuentaById(@PathVariable Integer id) {
+        return cuentaService.findById(id);
+    }
+
+    @PostMapping
+    public Cuenta createCuenta(@RequestBody Cuenta cuenta) {
+        return cuentaService.save(cuenta);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cuenta> actualizar(@PathVariable Integer id, @RequestBody Cuenta cuenta){
-        try {
-            Cuenta cue = cuentaService.findById(id);
-            cue.setId(id);
-            cue.setUsuario(cue.getUsuario());
-            cue.setPassword(cue.getPassword());
-            cue.setRol(cue.getRol());
-            
-
-            cuentaService.save(cue);
-            return ResponseEntity.ok(cuenta);
-        } catch ( Exception e ){
-            return ResponseEntity.notFound().build();
-        }
+    public Cuenta updateCuenta(@PathVariable Integer id, @RequestBody Cuenta cuenta) {
+        cuenta.setId(id);
+        cuenta.setUsuario(cuenta.getUsuario());
+        cuenta.setPassword(cuenta.getPassword());
+        cuenta.setRol(cuenta.getRol());
+        return cuentaService.save(cuenta);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id){
-        try{
-            cuentaService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch ( Exception e ){
-            return ResponseEntity.notFound().build();
-        }
-
+    public void deleteCuenta(@PathVariable Integer id) {
+        cuentaService.deleteById(id);
     }
 }

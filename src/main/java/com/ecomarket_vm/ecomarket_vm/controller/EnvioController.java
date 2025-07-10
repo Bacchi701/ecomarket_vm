@@ -3,8 +3,7 @@ package com.ecomarket_vm.ecomarket_vm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,56 +26,31 @@ public class EnvioController {
     private EnvioService envioService;
 
     @GetMapping
-    public ResponseEntity<List<Envio>> listar(){
-        List<Envio> envios = envioService.findAll();
-        if (envios.isEmpty()){
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(envios);
-    }
-    
-    @PostMapping
-    public ResponseEntity<Envio> guardar(@RequestBody Envio envio){
-        Envio productoNuevo = envioService.save(envio);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productoNuevo);
-
+    public List<Envio> getAllEnvios() {
+        return envioService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Envio> buscar(@PathVariable Integer id){
-        try {
-            Envio envio = envioService.findById(id);
-            return ResponseEntity.ok(envio);
-        } catch ( Exception e ) {
-            return ResponseEntity.notFound().build();
-        }
+    public Envio getEnvioById(@PathVariable Integer id) {
+        return envioService.findById(id);
+    }
+    
+    @PostMapping
+    public Envio createEnvio(@RequestBody Envio reserva) {
+        return envioService.save(reserva);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Envio> actualizar(@PathVariable Integer id, @RequestBody Envio envio){
-        try {
-            Envio env = envioService.findById(id);
-            env.setIdEnvio(id);
-            env.setRunComprador(env.getRunComprador());
-            env.setFechaCompra(env.getFechaCompra());
-            env.setFechaEntrega(env.getFechaEntrega());
-            
-
-            envioService.save(env);
-            return ResponseEntity.ok(envio);
-        } catch ( Exception e ){
-            return ResponseEntity.notFound().build();
-        }
+    public Envio updateReserva(@PathVariable Integer id, @RequestBody Envio envio) {
+        envio.setId(id);
+        envio.setRunComprador(envio.getRunComprador());
+        envio.setFechaCompra(envio.getFechaCompra());
+        envio.setFechaEntrega(envio.getFechaEntrega());
+        return envioService.save(envio);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id){
-        try{
-            envioService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch ( Exception e ){
-            return ResponseEntity.notFound().build();
-        }
-
+    public void deleteEnvio(@PathVariable Integer id) {
+        envioService.deleteById(id);
     }
 }

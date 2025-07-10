@@ -19,9 +19,14 @@ public class Envio { // idEnvio, runComprador, fechaCompra, fechaEntrega
     private String runComprador;
     private Date fechaCompra;
     private Date fechaEntrega;
+    private Integer estado;
 
     @ManyToOne
-    @JoinColumn(name = "id_cuenta", nullable = false)
-    private Cuenta cuenta;
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "id_producto", nullable = false)
+    private Producto producto;
 
 }

@@ -3,8 +3,7 @@ package com.ecomarket_vm.ecomarket_vm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,57 +26,33 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> listar(){
-        List<Cliente> clientes = clienteService.findAll();
-        if (clientes.isEmpty()){
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(clientes);
-    }
-
-    @PostMapping
-    public ResponseEntity<Cliente> guardar(@RequestBody Cliente cliente){
-        Cliente productoNuevo = clienteService.save(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productoNuevo);
-
+    public List<Cliente> getAllClientes() {
+        return clienteService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscar(@PathVariable Integer id){
-        try {
-            Cliente cliente = clienteService.findById(id);
-            return ResponseEntity.ok(cliente);
-        } catch ( Exception e ) {
-            return ResponseEntity.notFound().build();
-        }
+    public Cliente getClienteById(@PathVariable Integer id) {
+        return clienteService.findById(id);
+    }
+
+    @PostMapping
+    public Cliente createCliente(@RequestBody Cliente cliente) {
+        return clienteService.save(cliente);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> actualizar(@PathVariable Integer id, @RequestBody Cliente cliente){
-        try {
-            Cliente cli = clienteService.findById(id);
-            cli.setId(id);
-            cli.setRun(cli.getRun());
-            cli.setNombre(cli.getNombre());
-            cli.setApellido(cli.getApellido());
-            cli.setCorreo(cli.getCorreo());
-            cli.setDireccionEnvio(cli.getDireccionEnvio());
-
-            clienteService.save(cli);
-            return ResponseEntity.ok(cliente);
-        } catch ( Exception e ){
-            return ResponseEntity.notFound().build();
-        }
+    public Cliente updateCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
+        cliente.setId(id);
+        cliente.setRun(cliente.getRun());
+        cliente.setNombre(cliente.getNombre());
+        cliente.setApellido(cliente.getApellido());
+        cliente.setCorreo(cliente.getCorreo());
+        cliente.setDireccionEnvio(cliente.getDireccionEnvio());
+        return clienteService.save(cliente);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id){
-        try{
-            clienteService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch ( Exception e ){
-            return ResponseEntity.notFound().build();
-        }
-
+    public void deleteCliente(@PathVariable Integer id) {
+        clienteService.deleteById(id);
     }
 }

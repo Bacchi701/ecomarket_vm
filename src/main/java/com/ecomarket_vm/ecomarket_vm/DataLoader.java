@@ -50,24 +50,25 @@ public class DataLoader implements CommandLineRunner {
             cuenta.setId(i + 1);
             cuenta.setUsuario(faker.internet().username());
             cuenta.setPassword(faker.internet().password());
-            cuenta.setRol(faker.basketball().positions()); // REVISAR
+            cuenta.setRol(faker.basketball().positions());
             cuenta.setCliente(clientes.get(random.nextInt(clientes.size())));
             cuentaRepository.save(cuenta);
         }
 
-        List<Cuenta> cuentas = cuentaRepository.findAll();
+        List<Producto> productos = productoRepository.findAll();
         // Generar envios
         for (int i = 0; i < 50; i++) {
             Envio envio = new Envio();
             envio.setId(i + 1);
-            envio.setCuenta(cuentas.get(random.nextInt(cuentas.size())));
+            envio.setCliente(clientes.get(random.nextInt(clientes.size())));
             envio.setRunComprador(faker.idNumber().valid());
             envio.setFechaCompra(new Date());
             envio.setFechaEntrega(new Date());
+            envio.setProducto(productos.get(random.nextInt(productos.size())));
             envioRepository.save(envio);
         }
 
-        List<Envio> envios = envioRepository.findAll();
+        
         // Generar productos
         for (int i = 0; i < 20; i++) {
             Producto producto = new Producto();
@@ -76,7 +77,6 @@ public class DataLoader implements CommandLineRunner {
             producto.setDescripcion(faker.text().text(5, 20));
             producto.setPrecio(faker.number().numberBetween(10000, 99999));
             producto.setCantidad(faker.number().randomDigit());
-            producto.setEnvio(envios.get(random.nextInt(envios.size())));
             productoRepository.save(producto);
         }
     }
