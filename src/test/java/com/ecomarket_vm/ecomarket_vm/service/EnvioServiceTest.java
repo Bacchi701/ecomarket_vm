@@ -83,8 +83,8 @@ public class EnvioServiceTest {
 
         Producto producto = new Producto();
         producto.setCodigo(1);
-        producto.setNombre("Sala 101");
-        producto.setDescripcion("Sala 101");
+        producto.setNombre("Bolsa de maiz");
+        producto.setDescripcion("Una bolsa de maiz de 20kg");
         producto.setPrecio(12000);
         producto.setCantidad(10);
 
