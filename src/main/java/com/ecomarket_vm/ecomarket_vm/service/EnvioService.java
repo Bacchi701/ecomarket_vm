@@ -1,5 +1,6 @@
 package com.ecomarket_vm.ecomarket_vm.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,25 @@ public class EnvioService {
 
     public void deleteById(Integer id){
         envioRepository.deleteById(id);
+    }
+
+    public List<Envio> findByClienteId(Integer idCliente) {
+        return envioRepository.findByClienteId(idCliente);
+    }
+
+    public List<Envio> findByProductoCodigo(Integer codigoSala) {
+        return envioRepository.findByProductoCodigo(codigoSala);
+    }
+
+    public List<Envio> findByFechaCompra(Date fecha) {
+        return envioRepository.findByFechaCompra(fecha);
+    }
+
+    public List<Envio> findByEstado(Integer estado) {
+        return envioRepository.findByEstado(estado);
+    }
+
+    public long countByClienteId(Integer idCliente) {
+        return envioRepository.countByClienteId(idCliente);
     }
 }
