@@ -11,6 +11,10 @@ import com.ecomarket_vm.ecomarket_vm.model.Producto;
 import com.ecomarket_vm.ecomarket_vm.service.ProductoService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,12 +47,24 @@ public class ProductoController {
     
     @PostMapping
     @Operation(summary = "Crear un nuevo producto", description = "Crea un producto.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Producto creado exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "404", description = "Error al crear el producto")
+    })
     public Producto createProducto(@RequestBody Producto producto) {
         return productoService.save(producto);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un producto", description = "Actualiza un producto mediante su id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Producto actualizado exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "404", description = "Error al actualizar el producto")
+    })
     public Producto updateProducto(@PathVariable Integer id, @RequestBody Producto producto) {
         producto.setCodigo(id);
         producto.setNombre(producto.getNombre());
@@ -60,6 +76,12 @@ public class ProductoController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar un producto", description = "Elimina un producto mediante su id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Producto eliminado exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "404", description = "Error al eliminar el producto")
+    })
     public void deleteProducto(@PathVariable Integer id) {
         productoService.deleteById(id);
     }

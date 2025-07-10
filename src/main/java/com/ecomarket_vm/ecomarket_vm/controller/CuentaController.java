@@ -11,6 +11,10 @@ import com.ecomarket_vm.ecomarket_vm.model.Cuenta;
 import com.ecomarket_vm.ecomarket_vm.service.CuentaService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,12 +47,24 @@ public class CuentaController {
 
     @PostMapping
     @Operation(summary = "Crear nueva cuenta", description = "Crea una cuenta.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cuenta creada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Cuenta.class))),
+            @ApiResponse(responseCode = "404", description = "Error al crear la cuenta")
+    })
     public Cuenta createCuenta(@RequestBody Cuenta cuenta) {
         return cuentaService.save(cuenta);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar una cuenta", description = "Actualiza la información registrada en una cuenta mediante su id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cuenta actualizada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Cuenta.class))),
+            @ApiResponse(responseCode = "404", description = "Error al actualizar la cuenta")
+    })
     public Cuenta updateCuenta(@PathVariable Integer id, @RequestBody Cuenta cuenta) {
         cuenta.setId(id);
         cuenta.setUsuario(cuenta.getUsuario());
@@ -59,6 +75,12 @@ public class CuentaController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una cuenta", description = "Elimina una cuenta con toda su informacion mediante su id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cuenta eliminada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Cuenta.class))),
+            @ApiResponse(responseCode = "404", description = "Error al eliminar la cuenta")
+    })
     public void deleteCuenta(@PathVariable Integer id) {
         cuentaService.deleteById(id);
     }
