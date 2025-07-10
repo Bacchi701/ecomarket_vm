@@ -3,6 +3,9 @@ package com.ecomarket_vm.ecomarket_vm.controller;
 import com.ecomarket_vm.ecomarket_vm.assemblers.EnvioModelAssembler;
 import com.ecomarket_vm.ecomarket_vm.model.Envio;
 import com.ecomarket_vm.ecomarket_vm.service.EnvioService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.CollectionModel;
@@ -18,6 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/api/v2/envios")
+@Tag(name = "Envios v2", description = "HATEOAS")
 public class EnvioControllerV2 {
 
     @Autowired
